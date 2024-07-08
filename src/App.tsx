@@ -10,66 +10,31 @@ import { useEffect, useState } from 'react';
 
 
 
-<Grid xs={12} lg={10}>
-	<WeatherChart></WeatherChart>
-</Grid>
-
-
 function App() {
 	//https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088
 
 	let [indicators, setIndicators] = useState([])
 
-
-
-	{/* Hook: useEffect */ }
+		// PREGUNTAR AL PROFESOR COMO HACER BIEN LA PARTE DEL TIEMPO 
+		// YA QUE COMUNMENTE SE TE DAÑA AL IMPLEMENTARLO.
 
 
 	useEffect(() => {
 		(async () => {
 
-			{/* Request */ }
-
-			
-			let savedTextXML = ''
-
-			{/* Del LocalStorage, obtiene el valor de las claves openWeatherMap y expiringTime */}
-
-			savedTextXML = localStorage.getItem("openWeatherMap")
-			let expiringTime = localStorage.getItem("expiringTime")
-
-			{/* Estampa de tiempo actual */}
-
-			let nowTime = (new Date()).getTime();
-
-			{/* Realiza la petición asicrónica cuando: 
-				(1) La estampa de tiempo de expiración (expiringTime) es nula, o  
-				(2) La estampa de tiempo actual es mayor al tiempo de expiración */}
-
-			if(expiringTime === null || nowTime > parseInt(expiringTime)) {
-
 				{/* Request */}
 
-				let API_KEY = "63162f2cb9dbc8a722518d5c48390088"
-				let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=${API_KEY}`)
-				savedTextXML = await response.text();
+			let API_KEY = "63162f2cb9dbc8a722518d5c48390088"
+			let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=${API_KEY}`)
+			let savedTextXML = await response.text();
 
-
-				{/* Diferencia de tiempo */}
-
-				let hours = 1
-				let delay = hours * 3600000
-
-
-				{/* En el LocalStorage, almacena texto en la clave openWeatherMap y la estampa de tiempo de expiración */}
-
-				localStorage.setItem("openWeatherMap", savedTextXML)
-				localStorage.setItem("expiringTime", (nowTime + delay ).toString() )
-
-				const parser = new DOMParser();
+			{/* XML Parser */ }
+			const parser = new DOMParser();
 			const xml = parser.parseFromString(savedTextXML, "application/xml");
 
+			//Array para poner los datos.
 			let dataToIndicators = new Array()
+
 			let nCuidad = xml.getElementsByTagName("name")[0]
 			let cuidad= nCuidad.textContent	
 
@@ -92,14 +57,8 @@ function App() {
 
 			{/* Modificación de la variable de estado mediante la función de actualización */ }
 
-			setIndicators(indicatorsElements)
-
-			}
-
-
-			
-		})()
-	}, [])
+			setIndicators(indicatorsElements)})()
+		}, [])
 
 
 
@@ -109,7 +68,7 @@ function App() {
 			<Grid xs={12} sm={12} md={6} lg={6}><Summary></Summary></Grid>
 			<Grid xs={6} lg={4}>
 
-{indicators[0]}
+		{indicators[0]}
 
 {/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} /> */}
 
