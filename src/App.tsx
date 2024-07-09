@@ -24,8 +24,7 @@ function App() {
 
 				{/* Request */}
 
-			let API_KEY = "63162f2cb9dbc8a722518d5c48390088"
-			let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=${API_KEY}`)
+			let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088`)
 			let savedTextXML = await response.text();
 
 			{/* XML Parser */ }

@@ -6,7 +6,7 @@ export default function WeatherChart() {
     {/* Configuración */}
 
     let options = {
-        title: "Precipitación, Humedad y Nubosidad vs Hora",
+        title: "Precipitación, Humedad, Nubosidad, Temperatura, Velocidad de Viento y Presion vs Hora",
         curveType: "function",
         legend: { position: "right" },
     }
