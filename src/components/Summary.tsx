@@ -9,6 +9,8 @@ import daytimeG from '../assets/daytimeG.jpg';
 import afternoonG from '../assets/afternoonG.jpg';
 import eveningG from '../assets/eveningG.jpg';
 import nighttimeG from '../assets/nighttimeG.jpg';
+import sun from '../assets/sun.gif';
+import moon from '../assets/night.gif';
 
 
 export default function Summary(){
@@ -38,19 +40,24 @@ export default function Summary(){
     const hour = timeInUTC5.getHours();
     let timeOfDay = "";
     let currenttimepicture = null
+    let currentemoji = null
 
     if (hour >= 5 && hour < 12){
-        timeOfDay = 'Mañana';
+        timeOfDay = 'Guayaquil: Mañana';
         currenttimepicture = daytimeG
+        currentemoji = sun
     } else if (hour >= 12 && hour < 17) {
-        timeOfDay = 'Tarde';
+        timeOfDay = 'Guayaquil: Tarde';
+        currentemoji = sun
         currenttimepicture = afternoonG
     } else if (hour >= 17 && hour < 20) {
-        timeOfDay = 'Atardecer';
+        timeOfDay = 'Guayaquil: Atardecer';
         currenttimepicture = eveningG 
+        currentemoji = moon
     } else {
-        timeOfDay = 'Noche';
+        timeOfDay = 'Guayaquil: Noche';
         currenttimepicture = nighttimeG
+        currentemoji = moon
     }
 
     return (
@@ -64,7 +71,7 @@ export default function Summary(){
                 />
                 <CardContent>
                     <Typography gutterBottom component="h2" variant="h6" color="primary">
-                        {timeOfDay}
+                    <img src={currentemoji} alt="Image" style={{ width: 40, height: 40, marginRight: '0.5em' }}/>{timeOfDay}
                     </Typography>
                     <Typography component="p" variant="h4">
                     {formattedTime}
