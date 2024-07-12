@@ -12,7 +12,7 @@ export default function WeatherChart({ selectedVariable }) {
         (async () => {
             try {
                 console.log(selectedVariable)
-                // Realizar la solicitud de datos del clima
+     
                 let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088`);
                 let savedTextXML = await response.text();
                 const parser = new DOMParser();
@@ -35,10 +35,10 @@ export default function WeatherChart({ selectedVariable }) {
                     let clouds = time[i].getElementsByTagName("clouds")[0];
                     let cloudValue = parseFloat(clouds.getAttribute("all"));
                     CloudData.push([new Date(timeFrom),cloudValue])
-                    // Agregar cada punto de datos como un array
+                    
                     dataTable.push([new Date(timeFrom), humidityValue, valueCelsius, windSpeedValue, cloudValue]);
                 }
-                // Agregar encabezados al inicio de los datos
+          
                 switch(selectedVariable){
                     case -1:                      
                         setChartData([['Fecha-Hora', 'Humedad (%)', 'Temperatura (°C)', 'Velocidad del viento (m/s)', 'Nubosidad']].concat(dataTable));
@@ -65,13 +65,13 @@ export default function WeatherChart({ selectedVariable }) {
     },[selectedVariable]);
     
 
-    // Configuración de opciones para el gráfico
+
     let options = {
         title: "Precipitación, Humedad, Nubosidad, Temperatura, Velocidad de Viento vs Hora",
         curveType: "function",
         legend: { position: "right" },
         hAxis: {
-            format: 'dd/MM/yyyy HH:mm', // Formato de fecha/hora en el eje x
+            format: 'dd/MM/yyyy HH:mm', 
         }
     };
 

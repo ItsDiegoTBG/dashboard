@@ -15,6 +15,7 @@ import moon from '../src/assets/night.gif';
 import night from '../src/assets/night (1).gif'
 import rainy from '../src/assets/weather.gif'
 import cloudy from '../src/assets/cloudy.gif'
+import Mapa from '../src/assets/map.png'
 
 function App() {
 	//https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088
@@ -34,7 +35,7 @@ function App() {
 			const parser = new DOMParser();
 			const xml = parser.parseFromString(savedTextXML, "application/xml");
 
-			//Array para poner los datos.
+			
 			let dataToIndicators = new Array()
 			let dataToForecast = []
 			let nCuidad = xml.getElementsByTagName("name")[0]
@@ -133,16 +134,6 @@ function App() {
 				/>
 			)
 
-			/* imageUrl?: string;
-    date?:String;
-    from?: String;
-    temp?:Number;
-    cloud?: String;
-    precipitation?: Number;
-    humidity?: Number;*/
-
-
-			{/* Modificación de la variable de estado mediante la función de actualización */ }
 
 			setIndicators(indicatorsElements)
 			setForecasts(ForecastElements)
@@ -191,7 +182,20 @@ function App() {
 			{forecasts[2]}
              </Box></Grid>
 
-			 
+			
+			 <Grid xs={0} lg={2} >
+			</Grid>
+			 <Grid xs={6} lg={8} >
+			<Box bgcolor="lightblue" p={2} borderRadius={4}>
+			<Typography variant="h4" gutterBottom style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 'bold' }}>
+             	Mapa
+           </Typography>
+			<img src={Mapa} alt="Image" style={{ width: '100%' , height: 400 }} /> 
+             </Box>
+			</Grid>
+			<Grid xs={0} lg={2} >
+			</Grid>
+			
 			
 			<Grid xs={12} lg={12}><Box bgcolor="lightblue" p={2} borderRadius={4}>
                     <Typography variant="h4" gutterBottom style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 'bold' }}>

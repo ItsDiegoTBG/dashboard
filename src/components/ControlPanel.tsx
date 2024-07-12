@@ -21,12 +21,12 @@ export default function ControlPanel({ setSelectedVariable }) {
 
     };
 
-         {/* Variable de estado y función de actualización */}
+ 
 
          let [, setSelected] = useState(-1)
          const descriptionRef = useRef<HTMLDivElement>(null);
 
-    {/* Datos de los elementos del Select */}
+  
 
 
     let items = [

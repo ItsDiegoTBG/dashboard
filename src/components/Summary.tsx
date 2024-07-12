@@ -42,6 +42,7 @@ export default function Summary(){
     let currenttimepicture = null
     let currentemoji = null
 
+   
     if (hour >= 5 && hour < 12){
         timeOfDay = 'Guayaquil: Mañana';
         currenttimepicture = daytimeG
@@ -50,10 +51,10 @@ export default function Summary(){
         timeOfDay = 'Guayaquil: Tarde';
         currentemoji = sun
         currenttimepicture = afternoonG
-    } else if (hour >= 17 && hour < 20) {
+    } else if (hour >= 17 && hour < 19) {
         timeOfDay = 'Guayaquil: Atardecer';
         currenttimepicture = eveningG 
-        currentemoji = moon
+        currentemoji = sun
     } else {
         timeOfDay = 'Guayaquil: Noche';
         currenttimepicture = nighttimeG
