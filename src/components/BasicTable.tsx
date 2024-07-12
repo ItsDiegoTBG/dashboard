@@ -27,7 +27,7 @@ export default function BasicTable() {
         let dataTable = new Array()
         let time = xml.getElementsByTagName('time');
 
-        for (let i = 0; i < time.length; i++) {
+        for (let i = 0; i < 10; i++) {
             const timeFrom = time[i].getAttribute("from")
             const timeDo = time[i].getAttribute("to")
 
@@ -37,8 +37,9 @@ export default function BasicTable() {
             let valueTemp = temp.getAttribute("value")
 
             let valueCelsius = `${parseFloat((parseFloat(valueTemp) - 273.15).toFixed(2))}°C`;
+
             let precipitation = time[i].getElementsByTagName("precipitation")[0]
-            let precipValue = precipitation.getAttribute("value")
+            let precipValue = (parseFloat(precipitation.getAttribute("probability"))*100).toFixed(2)+"%"
             
             let windSpeed = time[i].getElementsByTagName("windSpeed")[0]
             let windSpeedValue = windSpeed.getAttribute("mps")

@@ -7,16 +7,48 @@ import BasicTable from './components/BasicTable';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPanel';
 import { useEffect, useState } from 'react';
+import morningBackground from "./resources/daybackground.gif";
+import nightBackground from "./resources/nightbackground2.gif";
+import sunupdownBackground from "./resources/dawnbackground.gif";
+import sun from "./resources/sun.gif";
+import suncloud from "./resources/sun.gif";
+import sunrain from "./resources/sun.gif";
+import moon from "./resources/sun.gif";
+import mooncloud from "./resources/sun.gif";
+import moonrain from "./resources/sun.gif";
 
-
+//Imports de imagenes max 10
 
 function App() {
 	//https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088
 
 	let [indicators, setIndicators] = useState([])
+	let [backgroundStyle, setBackgroundStyle] = useState({});
+	let [icon, setIcon] = useState('');
+	 {/* 1. Sirven de comunicación entre Control Panel y WeatherChart */}
+	 const [tunnel, setTunnel] = useState("")
 
-		// PREGUNTAR AL PROFESOR COMO HACER BIEN LA PARTE DEL TIEMPO 
-		// YA QUE COMUNMENTE SE TE DAÑA AL IMPLEMENTARLO.
+	const getCurrentHour = () => {
+		return new Date().getHours();
+	  };
+
+	  const setBackgroundAndIconBasedOnTime = () => {
+		const currentHour = getCurrentHour();
+		const morningStart = 6; // Cambiar el fondo a las 6am
+		const eveningEnd = 18;  // Cambiar el fondo a las 6pm
+	
+		// Definir fondos e iconos para la mañana y la tarde
+		
+	
+		// Establecer el estilo del fondo y el icono según la hora actual
+		if (currentHour >= morningStart && currentHour < eveningEnd) {
+		  setBackgroundStyle(morningBackground);
+		  setIcon(sun);
+		} else {
+		  setBackgroundStyle(nightBackground);
+		  setIcon(moon);
+		}
+	  };
 
 
 	useEffect(() => {
@@ -56,7 +88,9 @@ function App() {
 
 			{/* Modificación de la variable de estado mediante la función de actualización */ }
 
-			setIndicators(indicatorsElements)})()
+			setIndicators(indicatorsElements)
+			setBackgroundAndIconBasedOnTime();
+		})()
 		}, [])
 
 
@@ -65,32 +99,13 @@ function App() {
 		<Grid container spacing={5}>
 			<Grid xs={12} sm={12} md={6} lg={6}><Summary></Summary></Grid>
 			<Grid xs={12} sm={12} md={6} lg={6}><Summary></Summary></Grid>
-			<Grid xs={6} lg={4}>
-
-		{indicators[0]}
-
-{/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} /> */}
-
-</Grid>
-
-<Grid xs={6} lg={4}>
-
-{indicators[1]}
-
-{/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} /> */}
-
-</Grid>
-
-<Grid xs={6} lg={4}>
-
-{indicators[2]}
-
-{/* <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} /> */}
-
-</Grid>
+			<Grid xs={6} lg={4}>{indicators[0]}</Grid>
+			<Grid xs={6} lg={4}>{indicators[1]}</Grid>
+			<Grid xs={6} lg={4}>{indicators[2]}</Grid>
+			<Grid xs={12} lg={2}><ControlPanel  /></Grid>
+			<Grid xs={12} lg={10}><WeatherChart ></WeatherChart></Grid>
 			<Grid xs={12} sm={12} md={12} lg={12}><BasicTable /></Grid>
-			<Grid xs={12} lg={2}><ControlPanel /></Grid>
-			<Grid xs={12} lg={10}><WeatherChart></WeatherChart></Grid>
+
 		</Grid>
 	)
 }
