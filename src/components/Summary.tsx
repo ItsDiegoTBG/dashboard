@@ -11,6 +11,9 @@ import eveningG from '../assets/eveningG.jpg';
 import nighttimeG from '../assets/nighttimeG.jpg';
 import sun from '../assets/sun.gif';
 import moon from '../assets/night.gif';
+import NBG from '../assets/nightbackground2.gif'
+import DBG from '../assets/daybackground.gif'
+import DAWNBG from '../assets/dawnbackground.gif'
 
 
 export default function Summary(){
@@ -41,24 +44,43 @@ export default function Summary(){
     let timeOfDay = "";
     let currenttimepicture = null
     let currentemoji = null
-
+//SE QUE HAY UNA FORMA DE HACER ESTO MAS BONITO
+				//PERO ME TOMO 12 HORAS PARA DARME DE CUENTA QUE ERA EL DOCUMENT BODY
+				//QUE NECESITABA QUE CAMBIAR, NI CHATGPT, NI EL MATERIAL DE MUI/REACT
+				//MENCIONABA ALGO REMOTO A ESO.
    
     if (hour >= 5 && hour < 12){
         timeOfDay = 'Guayaquil: Mañana';
         currenttimepicture = daytimeG
         currentemoji = sun
+        document.body.style.backgroundImage = `url(${DBG})`;
+				document.body.style.backgroundSize = "cover"; 
+				document.body.style.backgroundRepeat = "no-repeat"; 
+				document.body.style.backgroundPosition = "center center";
     } else if (hour >= 12 && hour < 17) {
         timeOfDay = 'Guayaquil: Tarde';
         currentemoji = sun
         currenttimepicture = afternoonG
+        document.body.style.backgroundImage = `url(${DBG})`;
+				document.body.style.backgroundSize = "cover"; 
+				document.body.style.backgroundRepeat = "no-repeat"; 
+				document.body.style.backgroundPosition = "center center";
     } else if (hour >= 17 && hour < 19) {
         timeOfDay = 'Guayaquil: Atardecer';
         currenttimepicture = eveningG 
         currentemoji = sun
+        document.body.style.backgroundImage = `url(${DAWNBG})`;
+				document.body.style.backgroundSize = "cover"; 
+				document.body.style.backgroundRepeat = "no-repeat"; 
+				document.body.style.backgroundPosition = "center center";
     } else {
         timeOfDay = 'Guayaquil: Noche';
         currenttimepicture = nighttimeG
         currentemoji = moon
+        document.body.style.backgroundImage = `url(${NBG})`;
+				document.body.style.backgroundSize = "cover"; 
+				document.body.style.backgroundRepeat = "no-repeat"; 
+				document.body.style.backgroundPosition = "center center"; 
     }
 
     return (

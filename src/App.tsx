@@ -17,15 +17,18 @@ import rainy from '../src/assets/weather.gif'
 import cloudy from '../src/assets/cloudy.gif'
 import Mapa from '../src/assets/map.png'
 
+
 function App() {
 	//https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088
 
 	let [indicators, setIndicators] = useState([])
 	const [selectedVariable, setSelectedVariable] = useState(-1);
 	let [forecasts, setForecasts] = useState([])
-	useEffect(() => {
-		(async () => {
+	
 
+	useEffect(() => {(
+		async () => {
+			
 				{/* Request */}
 
 			let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=63162f2cb9dbc8a722518d5c48390088`)
@@ -53,6 +56,7 @@ function App() {
 			dataToIndicators.push(["Longitude", cuidad, longitude])
 			let time = xml.getElementsByTagName('time');
 
+
 			for (let i = 0; i < time.length; i++) {
 				const timeFrom = time[i].getAttribute("from")
 				const fechaActual = new Date();
@@ -65,7 +69,7 @@ function App() {
 					month: 'long',
 					day: 'numeric',
 				});
-		
+				
 				
 
 				if((formattedTime.getDate() === diaSiguiente.getDate()) &&
@@ -88,33 +92,42 @@ function App() {
 				
 				let clouds = time[i].getElementsByTagName("clouds")[0]
 				let cloudValue = clouds.getAttribute("value")
-
+				
 				if (formattedTime.getHours() === 6 ){
 					iconToUse=sun
+					 
 				}
 				if (formattedTime.getHours() === 6 && (cloudValue === "overcast clouds" || cloudValue === "broken clouds")){
 					iconToUse=cloudy
+					
 				}
 				if (formattedTime.getHours() === 6 && (cloudValue === "overcast clouds" || cloudValue === "broken clouds" && precipValue === "5.00%")){
 					iconToUse=rainy
+					
 				}
 				if(formattedTime.getHours() === 12 ){
 					iconToUse=sun
+					
 				}
 				if(formattedTime.getHours() === 12 && (cloudValue === "overcast clouds" || cloudValue === "broken clouds")){
 					iconToUse=cloudy
+					
 				}
 				if(formattedTime.getHours() === 12 && (cloudValue === "overcast clouds" || cloudValue === "broken clouds" && precipValue === "5.00%")){
 					iconToUse=rainy
+					
 				}
 				if(formattedTime.getHours() === 18){ 
 					iconToUse=night
+					
 				}
 				if(formattedTime.getHours() === 18 && (cloudValue === "overcast clouds" || cloudValue === "broken clouds")){ 
 					iconToUse=moon
+					 
 				}
 				if(formattedTime.getHours() === 18 && (cloudValue === "overcast clouds" || cloudValue === "broken clouds") && precipValue === "5.00%"){ 
 					iconToUse=moon
+					
 				}
 
 				
@@ -140,10 +153,13 @@ function App() {
 		})()
 		}, [])
 
-
+/*<body style={{ backgroundImage: `url(${NBG})`,backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		backgroundAttachment: 'fixed'}}> */
 
 	return (
-		<Grid container spacing={5}>
+		<div>
+		<Grid container spacing={5}>			
 			 <Grid xs={12} sm={12} md={12} lg={12}><Box bgcolor="white" p={2} borderRadius={4}>
                     <Typography variant="h3" gutterBottom style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 'bold' }} >
 					<img src={sun} alt="Image" style={{ width: 60, height: 60, marginRight: '0.5em', borderRadius: '50%' }}/>Weather Planner
@@ -208,6 +224,7 @@ function App() {
                     </Typography><BasicTable />
              </Box></Grid>
 		</Grid>
+	  </div>
 	)
 }
 
