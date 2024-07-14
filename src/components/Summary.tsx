@@ -26,7 +26,7 @@ export default function Summary(){
         return () => clearInterval(interval);
     }, []);
 
-    const utcOffset = -5 * 60 * 60 * 1000*0; // SE ESTA USANDO ESTO PARA VERIFICAR
+    const utcOffset = 5 * 60 * 60 * 1000*0// SE ESTA USANDO ESTO PARA VERIFICAR
     //FUNCIONAMIENTO, MULTIPLICAR POR 0 PARA QUITAR EFECTO YA TIENE LA HORA LOCAL
     //QUITE EL CERO Y PONGA MAS O MENOS PARA VER LOS CAMBIOS SI NO QUIERE ESPERAR.
     
